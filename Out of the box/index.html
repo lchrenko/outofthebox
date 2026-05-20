@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      // Filter out generic cross-origin/browser extension errors that do not impact application execution
+      if (message === 'Script error.' || message === 'Script error' || !source || (lineno === 0 && colno === 0)) {
+        console.warn('Ignored cross-origin or browser extension script error:', message);
+        return false;
+      }
+
+      const errorDiv = document.createElement('div');
+      errorDiv.style.position = 'fixed';
+      errorDiv.style.top = '0';
+      errorDiv.style.left = '0';
+      errorDiv.style.width = '100%';
+      errorDiv.style.backgroundColor = '#fee2e2';
+      errorDiv.style.color = '#b91c1c';
+      errorDiv.style.padding = '1.5rem';
+      errorDiv.style.borderBottom = '4px solid #ef4444';
+      errorDiv.style.zIndex = '99999';
+      errorDiv.style.fontFamily = 'monospace';
+      errorDiv.style.fontSize = '0.9rem';
+      errorDiv.style.whiteSpace = 'pre-wrap';
+      errorDiv.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1)';
+      
+      errorDiv.innerHTML = `<strong>⚠️ Browser JavaScript Runtime Error Intercepted:</strong><br><br>` + 
+                           `Message: <strong>${message}</strong><br>` + 
+                           `Source: ${source}<br>` + 
+                           `Line: ${lineno}:${colno}<br>` + 
+                           `Stack Trace:<br><pre style="margin-top:0.5rem; background:#fff; padding:0.75rem; border-radius:4px; border:1px solid #fee2e2; overflow-x:auto;">${error ? error.stack : 'N/A'}</pre>`;
+                           
+      document.body.prepend(errorDiv);
+      return false; // Print to developer tools console too
+    };
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lots2Homes Inc. | Choose your lot. Choose your home. Build with confidence.</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Lots2Homes Inc. is a land-to-home marketplace and guided homebuilding platform. Explore available lots, choose compatible home designs, select premium finishes, and start your build with confidence.">
+  <meta name="keywords" content="home building, custom homes, buy land, lot marketplace, home designs, modular homes, sustainable building">
+  <meta name="author" content="Lots2Homes Inc.">
+  
+  <!-- Fonts: Montserrat (Headings) & Roboto (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="header-glass">
+    <div class="container navbar">
+      <!-- Logo -->
+      <a href="#/" class="logo">
+        <div class="logo-icon">L</div>
+        <span>Lots2Homes</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item" data-route="home"><a href="#/">Home</a></li>
+          <li class="nav-item" data-route="lots"><a href="#/lots">Available Lots</a></li>
+          <li class="nav-item" data-route="designs"><a href="#/designs">Home Designs</a></li>
+          <li class="nav-item" data-route="process"><a href="#/process">How It Works</a></li>
+          <li class="nav-item" data-route="submit-lot"><a href="#/submit-lot">Submit Your Lot</a></li>
+          <li class="nav-item" data-route="contractors"><a href="#/contractors">Contractors</a></li>
+          <li class="nav-item" data-route="faq"><a href="#/faq">FAQ</a></li>
+          <li class="nav-item" data-route="contact"><a href="#/contact">Contact</a></li>
+          <li class="nav-item" data-route="admin"><a href="#/admin" class="nav-cta" style="background-color: var(--color-bg-tertiary); color: var(--color-brand-primary); margin-left: 1rem;"><i data-lucide="shield" style="width: 14px; height: 14px; flex-shrink: 0;"></i>Admin</a></li>
+        </ul>
+      </nav>
+
+      <!-- Primary CTA -->
+      <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0;">
+        <a href="#/start-your-build" class="nav-cta" id="header-cta-btn">Start Your Build</a>
+        <button class="burger-menu" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobile-nav-menu">
+      <a href="#/" class="mobile-nav-link">Home</a>
+      <a href="#/lots" class="mobile-nav-link">Available Lots</a>
+      <a href="#/designs" class="mobile-nav-link">Home Designs</a>
+      <a href="#/process" class="mobile-nav-link">How It Works</a>
+      <a href="#/submit-lot" class="mobile-nav-link">Submit Your Lot</a>
+      <a href="#/contractors" class="mobile-nav-link">Contractors</a>
+      <a href="#/faq" class="mobile-nav-link">FAQ</a>
+      <a href="#/contact" class="mobile-nav-link">Contact</a>
+      <a href="#/admin" class="mobile-nav-link" style="color: var(--color-accent-gold-dark); font-weight: 600;"><i data-lucide="shield" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>Admin Portal</a>
+      <a href="#/start-your-build" class="btn btn-primary btn-sm mt-2">Start Your Build</a>
+    </div>
+  </header>
+
+  <!-- Dynamic Page Viewport -->
+  <main id="app-viewport">
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
+      <div class="text-center">
+        <div style="border: 4px solid var(--color-bg-tertiary); border-top: 4px solid var(--color-accent-gold); border-radius: 50%; width: 40px; height: 40px; margin: 0 auto 1rem; animation: spin 1s linear infinite;"></div>
+        <p class="text-muted font-weight-500">Loading Lots2Homes Experience...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Notification Toasts -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Floating Edit Page Button for Admins -->
+  <div id="admin-edit-page-fab" style="display:none; position: fixed; bottom: 2rem; left: 2rem; z-index: 9999;">
+    <button id="admin-edit-page-btn" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); border-radius: 9999px; padding: 0.75rem 1.25rem; font-weight: 600; font-size: 0.9rem; background-color: var(--color-accent-gold); color: #ffffff; border: none; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease;">
+      <i data-lucide="file-edit" style="width: 16px; height: 16px;"></i>
+      <span>Edit Page Content</span>
+    </button>
+  </div>
+
+  <!-- Elegant Footer -->
+  <footer id="app-footer" style="background-color: var(--color-brand-primary); color: #94a3b8; padding-top: 4rem; padding-bottom: 3rem; border-top: 1px solid var(--color-border-glass);"></footer>
+
+  <!-- App Core JS Modules -->
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+  
+  <!-- Loading spinner style -->
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</body>
+</html>
